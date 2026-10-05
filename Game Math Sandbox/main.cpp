@@ -51,6 +51,34 @@ auto main() -> int
 		case SelectTarget:
 			currentTarget = selectTarget(entities);
 			break;
+
+		case MoveTarget:
+
+			break;
+
+		case Distance:
+
+			break;
+
+		case Direction:
+
+			break;
+
+		case Magnitude:
+
+			break;
+
+		case Normalize:
+
+			break;
+
+		case Options:
+
+			break;
+
+		case Exit:
+
+			break;
 		}
 	}
 }

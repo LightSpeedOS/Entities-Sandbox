@@ -141,3 +141,12 @@ inline Entity* selectTarget(vector<Entity>& entities)
 
 	return currentTarget;
 }
+
+inline void moveTarget(Entity* target)
+{
+	clear();
+
+	cout << target->name << "(" << target->
+
+	cout << "[1] Move 5m   [2] Move 10m   [3] Move 15m" << endl;
+}

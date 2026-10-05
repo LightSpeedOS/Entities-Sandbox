@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Game Math Sandbox/Game Math Sandbox.vcxproj" />
+  <Project Path="Game Math Sandbox/Game Math Sandbox.vcxproj" Id="8f09d751-bfc7-4d7e-bb74-63b711ad2416" />
 </Solution>
