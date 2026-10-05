@@ -2,6 +2,7 @@
 
 #include "Structs.h"
 #include "Includes.h"
+#include "BackendLogic.h"
 
 inline Entity* findLocalPlayer(vector<Entity>& entities)
 {
@@ -14,72 +15,79 @@ inline Entity* findLocalPlayer(vector<Entity>& entities)
 	return nullptr;
 }
 
-inline void moveLocalPlayer(Entity* localPlayer)
+inline void moveEntity(Entity* entity)
 {
-	clear();
+
+	if (entity == nullptr)
+	{
+		clear();
+		cout << "[!] No Entity Has Been Selected" << endl;
+		pause();
+		return;
+	}
 	int step = 5;
 
 	while (true)
-	{ 
-		clear();
-
-	cout << "======== Move Player ========" << endl;
-	space();
-
-	cout << "Position: " << localPlayer->Position.x << ", " << localPlayer->Position.y << endl;
-	cout << "Step: " << step << "m" << endl;
-	space();
-
-	cout << setw(14) << "[W]" << " Forward" << endl;
-	cout << "[A] Left   [S] Back   [D] Right" << endl;
-	space();
-
-	cout << "[1] 5m   [2] 10m   [3] 15m" << endl;
-	cout << "[R] Return" << endl;
-
-	char key = _getch();
-
-	switch (tolower(key))
 	{
-	case 'w':
-		localPlayer->Position.y += step;
-		break;
-
-	case 's':
-		localPlayer->Position.y -= step;
-		break;
-
-	case 'a':
-		localPlayer->Position.x -= step;
-		break;
-
-	case 'd':
-		localPlayer->Position.x += step;
-		break;
-
-	case '1':
-		step = 5;
-		break;
-
-	case '2':
-		step = 10;
-		break;
-
-	case '3':
-		step = 15;
-		break;
-
-	case 'r':
 		clear();
-		cout << "Returning." << endl;
-		return;
+
+		cout << "======== Move Player ========" << endl;
+		space();
+
+		cout << "Position: " << fixed << setprecision(2) << entity->Position.x << ", " << entity->Position.y << endl;
+		cout << "Step: " << step << "m" << endl;
+		space();
+
+		cout << setw(14) << "[W]" << " Forward" << endl;
+		cout << "[A] Left   [S] Back   [D] Right" << endl;
+		space();
+
+		cout << "[1] 5m   [2] 10m   [3] 15m" << endl;
+		cout << "[R] Return" << endl;
+
+		char key = _getch();
+
+		switch (tolower(key))
+		{
+		case 'w':
+			entity->Position.y += step;
+			break;
+
+		case 's':
+			entity->Position.y -= step;
+			break;
+
+		case 'a':
+			entity->Position.x -= step;
+			break;
+
+		case 'd':
+			entity->Position.x += step;
+			break;
+
+		case '1':
+			step = 5;
+			break;
+
+		case '2':
+			step = 10;
+			break;
+
+		case '3':
+			step = 15;
+			break;
+
+		case 'r':
+			clear();
+			cout << "Returning." << endl;
+			return;
 
 
-	default:
-		invalid();
-		while (_kbhit()) _getwch();
-		break;
-	}
+		default:
+			invalid();
+			while (_kbhit()) _getwch();
+			break;
+		}
 	}
 }
 
@@ -140,13 +148,4 @@ inline Entity* selectTarget(vector<Entity>& entities)
 	getKey();
 
 	return currentTarget;
-}
-
-inline void moveTarget(Entity* target)
-{
-	clear();
-
-	cout << target->name << "(" << target->
-
-	cout << "[1] Move 5m   [2] Move 10m   [3] Move 15m" << endl;
 }

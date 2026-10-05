@@ -15,6 +15,8 @@ auto main() -> int
 	Entity* currentTarget = nullptr;
 	Entity* pLocalPlayer = findLocalPlayer(entities);
 
+	Setting setting;
+
 	int mainOption;
 
 	while (true)
@@ -45,7 +47,7 @@ auto main() -> int
 		{
 
 		case MovePlayer:
-			moveLocalPlayer(pLocalPlayer);
+			moveEntity(pLocalPlayer);
 			break;
 
 		case SelectTarget:
@@ -53,15 +55,15 @@ auto main() -> int
 			break;
 
 		case MoveTarget:
-
+			moveEntity(currentTarget);
 			break;
 
 		case Distance:
-
+			calculateDistance(pLocalPlayer, currentTarget);
 			break;
 
 		case Direction:
-
+			calculateDirection(pLocalPlayer, currentTarget);
 			break;
 
 		case Magnitude:

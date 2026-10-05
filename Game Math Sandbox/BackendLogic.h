@@ -24,3 +24,26 @@ inline string toLower(string text)
 	}
 	return text;
 }
+
+inline void tagBot(Entity* entity, Setting* setting)
+{
+	clear();
+
+	if (entity == nullptr)
+	{
+		cout << "Select a Target Before Using This Option" << endl;
+		pause();
+		return;
+	}
+	string nameSnapshot = entity->name;
+
+	if (setting->toggleBot)
+	{
+		setting->toggleBot = false;
+		entity->name = nameSnapshot;
+		return;
+	}
+
+	string addBot = entity->name + " [Bot]";
+	setting->toggleBot = true;
+}
