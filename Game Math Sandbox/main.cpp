@@ -31,7 +31,7 @@ auto main() -> int
 		cout << "[4] Distance" << endl;
 		cout << "[5] Direction To Target" << endl;
 		cout << "[6] Magnitude" << endl;
-		cout << "[7] Options" << endl;
+		cout << "[7] Normalize" << endl;
 		cout << "[8] Exit" << endl;
 
 		space();
@@ -67,20 +67,21 @@ auto main() -> int
 			break;
 
 		case Magnitude:
-
+			calculateMagnitude(pLocalPlayer, currentTarget);
 			break;
 
 		case Normalize:
-
-			break;
-
-		case Options:
-
+			calculateNormalize(pLocalPlayer, currentTarget);
 			break;
 
 		case Exit:
-
+			invalid();
 			break;
+
+		default:
+			invalid();
+			break;
+
 		}
 	}
 }

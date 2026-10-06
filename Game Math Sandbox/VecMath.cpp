@@ -1,5 +1,11 @@
 #include "VecMath.h"
 
+void printCoords(Entity* localPlayer, Entity* target)
+{
+	cout << localPlayer->name << " (" << localPlayer->Position.x << ", " << localPlayer->Position.y << ")" << endl;
+	cout << target->name << " (" << target->Position.x << ", " << target->Position.y << ")" << endl;
+}
+
 float getDistance(Entity* a, Entity* b)
 {
 	float disX = b->Position.x - a->Position.x;
@@ -21,8 +27,7 @@ void calculateDistance(Entity* localPlayer, Entity* target)
 
 	float distance = getDistance(localPlayer, target);
 
-	cout << localPlayer->name << " (" << localPlayer->Position.x << ", " << localPlayer->Position.y << ")" << endl;
-	cout << target->name << " (" << target->Position.x << ", " << target->Position.y << ")" << endl;
+	printCoords(localPlayer, target);
 	cout << "Distance: " << setprecision(2) << distance << endl;
 
 	space();
@@ -51,21 +56,74 @@ void calculateDistance(Entity* localPlayer, Entity* target)
 	}
 }
 
-void getDirection(Entity* a, Entity* b)
+Vec2 getDirection(Entity* a, Entity* b)
 {
-	float disX = b->Position.x - a->Position.x;
-	float disY = b->Position.y - a->Position.y;
+	clear();
 
-	cout << "Direction: " << "(" << disX << ", " << disY << ")" << endl;
-	getKey();
+	if (a == nullptr || b == nullptr)
+	{
+		clear();
+		cout << "[!] No Entity To Calculate" << endl;
+		pause();
+		return Vec2{};
+	}
+	Vec2 dir;
+	dir.x = b->Position.x - a->Position.x;
+	dir.y = b->Position.y - a->Position.y;
+	return dir;
 }
 
 void calculateDirection(Entity* localPlayer, Entity* target)
 {
+	clear();
 
-	cout << localPlayer->name << " (" << localPlayer->Position.x << ", " << localPlayer->Position.y << ") -> "
-		<< target->name << " (" << target->Position.x << ", " << target->Position.y << endl;
-	space();
+	printCoords(localPlayer, target);
 
-	getDirection(localPlayer, target);
+	Vec2 dir;
+	dir.x = target->Position.x - localPlayer->Position.x;
+	dir.y = target->Position.y - localPlayer->Position.y;
+
+	cout << "Direction: " << "(" << dir.x << ", " << dir.y << ")" << endl;
+	getKey();
+}
+
+float getMagnitude(const Vec2& v)
+{
+	return sqrt(v.x * v.x + v.y * v.y);
+}
+
+void calculateMagnitude(Entity* localPlayer, Entity* target)
+{
+	clear();
+	if (localPlayer == nullptr || target == nullptr)
+	{
+			clear();
+			cout << "[!] No Entity To Calculate" << endl;
+			pause();
+			return;
+	}
+
+	Vec2 dir = getDirection(localPlayer, target);
+	float mag = getMagnitude(dir);
+
+	printCoords(localPlayer, target);
+	cout << "Magnitude: " << mag << endl;
+	getKey();
+}
+
+Vec2 calculateNormalize(Entity* localPlayer, Entity* target)
+{
+	Vec2 dir = getDirection(localPlayer, target);
+	float mag = getMagnitude(dir);
+
+	if (mag == 0) return Vec2{};
+
+	Vec2 result;
+
+	result.x = dir.x / mag;
+	result.y = dir.y / mag;
+
+	cout << "Normalized Direction: " << "(" << result.x << ", " << result.y << endl;
+	cout << "Magnitude Check: " << getMagnitude(dir) << endl;
+	getKey();
 }

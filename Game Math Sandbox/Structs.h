@@ -11,8 +11,14 @@ enum mainMenu
 	Direction,
 	Magnitude,
 	Normalize,
-	Options,
 	Exit
+};
+
+enum subMenu
+{
+	Bot = 1,
+	Meters,
+	Return
 };
 
 struct Vec2
